@@ -1,2 +1,3 @@
-def call(){
-echo "Hello dosto this is first shared lib"
+def call() {
+    echo "Hello from shared library!"
+}
