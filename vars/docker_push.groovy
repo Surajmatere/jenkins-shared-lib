@@ -1,15 +1,16 @@
 def call(String project, String imageTag, String dockerUser) {
 
     withCredentials([usernamePassword(
-        credentialsId: 'dockerHubCred',
+        credentialsId: 'dockerHubCreds',   // Updated to match your Jenkins credential ID
         usernameVariable: 'DOCKER_USER',
         passwordVariable: 'DOCKER_PASS'
     )]) {
 
         sh """
-            docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+            echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin
             docker push ${dockerUser}/${project}:${imageTag}
         """
     }
 }
+
 
